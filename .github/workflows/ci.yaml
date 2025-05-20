@@ -7,8 +7,8 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  ECR_FRONTEND: <382828594185>.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/frontend
-  ECR_BACKEND: <382828594185>.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/backend
+  ECR_FRONTEND: 382828594185.dkr.ecr.us-east-1.amazonaws.com/frontend
+  ECR_BACKEND: 382828594185.dkr.ecr.us-east-1.amazonaws.com/backend
 
 jobs:
   build_and_push:
