@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/your_username/your_repo.git'
+    repoURL: 'https://github.com/govindr458/cicd.git'
     targetRevision: HEAD
     path: 'manifests'
   destination:
