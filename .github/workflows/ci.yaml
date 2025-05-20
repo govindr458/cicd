@@ -51,8 +51,19 @@ jobs:
           cat $HOME/.kube/config
           kubectl config current-context
           kubectl cluster-info
-
+      - name: Set up kubeconfig
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" > kubeconfig
+          export KUBECONFIG=$PWD/kubeconfig
+          kubectl config use-context arn:aws:eks:us-east-1:382828594185:cluster/my-app
+          kubectl cluster-info
 
       - name: Deploy to EKS
         run: |
+          export KUBECONFIG=$PWD/kubeconfig
+          kubectl apply -f manifests/
+
+
+      - name: Deploy to EKS
+          run: |
           kubectl apply -f manifests/
