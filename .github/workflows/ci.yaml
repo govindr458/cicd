@@ -46,6 +46,12 @@ jobs:
           mkdir -p $HOME/.kube
           echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
+      - name: Debug kubeconfig
+        run: |
+          cat $HOME/.kube/config
+          kubectl config current-context
+          kubectl cluster-info
+
 
       - name: Deploy to EKS
         run: |
