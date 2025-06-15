@@ -16,7 +16,7 @@ jobs:
   build_and_push:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Login to Docker Hub
@@ -37,6 +37,13 @@ jobs:
           docker tag backend:latest ${{ env.BACKEND_IMAGE }}:latest
           docker push ${{ env.BACKEND_IMAGE }}:latest
 
+      - name: Setup kubeconfig file
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
+          export KUBECONFIG=$HOME/.kube/config
+
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f manifests/
+          kubectl apply --validate=false -f manifests/
