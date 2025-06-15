@@ -37,12 +37,6 @@ jobs:
           docker tag backend:latest ${{ env.BACKEND_IMAGE }}:latest
           docker push ${{ env.BACKEND_IMAGE }}:latest
 
-      - name: Setup kubeconfig file
-        run: |
-          mkdir -p $HOME/.kube
-          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
-          chmod 600 $HOME/.kube/config
-
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f manifests/
